@@ -1,23 +1,96 @@
 package org.example;
 
 import org.example.contenido.Pelicula;
-import org.example.plataforma.Usuario;
+import org.example.plataforma.Plataforma;
+import org.example.util.ScannerUtils;
 
 
 public class Main {
-    //Constante (se nombra en mayuscula por convencion)
+    //Constantes (se nombra en mayuscula por convencion)
     public static final String NOMBRE_PLATAFORMA = "PLATZY PLAY ";
     public static final String VERSION = "1.0.0.";
 
+    public static final int AGREGAR = 1;
+    public static final int MOSTRAR_TODO = 2;
+    public static final int BUSCAR_POR_TITULO = 3;
+    public static final int ELIMINAR = 4;
+    public static final int SALIR = 5;
+
+
     public static void main(String[] args) {
+        Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
         System.out.println(NOMBRE_PLATAFORMA + VERSION);
 
-        //Pelicula pelicula --> Declaracion, new Pelicula --> Instanciacion, (    ) --> Inicializacion
-        Pelicula pelicula = new Pelicula("El señor de los anillos", 120, "Fantasia", 4.7);
+        cargarPeliculas(plataforma);
 
-        System.out.println(pelicula.obtenerFichaTecnica());
+        //Menu
+        while(true) {
+            int opcionElegida = ScannerUtils.capturarNumero("""
+                    1. Agregar contenido
+                    2. Mostrar todo
+                    3. Buscar por titulo
+                    4. Eliminar
+                    5. Salir
+                    """);
+            System.out.println("Opcion elegida: " + opcionElegida);
 
-        Usuario usuario = new Usuario("Juan", "juan@platzi.com");
-        usuario.ver(pelicula);
+            switch (opcionElegida) {
+                case AGREGAR -> {
+                    //Se solicitan los atributos para inicializar la instancia del objeto pelicula
+                    String nombre = ScannerUtils.capturarTexto("Nombre del contenido");
+                    String genero = ScannerUtils.capturarTexto("Genero del contenido");
+                    int duracion = ScannerUtils.capturarNumero("Duracion del contenido");
+                    double calificacion = ScannerUtils.capturarDecimal("Calificacion del contenido");
+
+                    plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
+                }
+                case MOSTRAR_TODO -> plataforma.mostrarTitulos();
+
+                case BUSCAR_POR_TITULO -> {
+                    String nombreBuscado = ScannerUtils.capturarTexto("Nombre del contenido a buscar");
+                    Pelicula peliculaEncontrada = plataforma.buscarPorTitulo(nombreBuscado);
+
+                    if ( peliculaEncontrada != null){
+                        System.out.println(peliculaEncontrada.obtenerFichaTecnica());
+                    } else {
+                        System.out.println(nombreBuscado.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
+                    }
+                }
+
+                case ELIMINAR -> {
+                    String nombreAEliminar = ScannerUtils.capturarTexto("Nombre del contenido a eliminar");
+                    Pelicula peliculaAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
+
+                    if ( peliculaAEliminar!= null){
+                        plataforma.eliminarPelicula(peliculaAEliminar);
+                        System.out.println(nombreAEliminar.toUpperCase() + " ELIMINADO!");
+                    } else {
+                        System.out.println(nombreAEliminar.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
+                    }
+                }
+
+                case SALIR -> System.exit(0);
+            }
+        }
+
+
+
+//        //Pelicula pelicula --> Declaracion, new Pelicula --> Instanciacion, (    ) --> Inicializacion
+//        //Pelicula pelicula = new Pelicula("El señor de los anillos", 120, "Fantasia", 4.7);
     }
+
+
+    private static void cargarPeliculas(Plataforma plataforma) {
+        plataforma.agregar(new Pelicula("Shrek", 90, "Animada"));
+        plataforma.agregar(new Pelicula("Inception", 148, "Ciencia Ficción"));
+        plataforma.agregar(new Pelicula("Titanic", 195, "Drama", 4.6));
+        plataforma.agregar(new Pelicula("John Wick", 101, "Acción"));
+        plataforma.agregar(new Pelicula("El Conjuro", 112, "Terror", 3.0));
+        plataforma.agregar(new Pelicula("Coco", 105, "Animada", 4.7));
+        plataforma.agregar(new Pelicula("Interstellar", 169, "Ciencia Ficción", 5));
+        plataforma.agregar(new Pelicula("Joker", 122, "Drama"));
+        plataforma.agregar(new Pelicula("Toy Story", 81, "Animada", 4.5));
+        plataforma.agregar(new Pelicula("Avengers: Endgame", 181, "Acción", 3.9));
+    }
+
 }

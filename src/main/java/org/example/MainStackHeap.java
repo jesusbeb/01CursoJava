@@ -7,23 +7,23 @@ public class MainStackHeap {
         Pelicula reyLeon = new Pelicula("El Rey Leon", 135, "Animada");
         Pelicula harryPotter = new Pelicula("Harry Potter", 200, "Fantasia");
 
-        System.out.println("reyLeon: " + reyLeon.titulo);
-        System.out.println("harryPotter: " + harryPotter.titulo);
-
-        //Con esta asignacion "reyLeon new Pelicula" ya quedo desaparecido (inalcanzable)
-        //reyLeon apunta a donde esta apuntando harryPotter en el heap
-        reyLeon = harryPotter;
-        System.out.println("----------------------------------");
-        System.out.println("reyLeon: " + reyLeon.titulo);
-        System.out.println("harryPotter: " + harryPotter.titulo);
-        //Por lo tanto cualquier cambio que se haga en cualquiera de las dos variables sera
-        //sera visible por todas las variables que esten con esa misma asignacion
-
-        //Por ejemplo ahora solo cambiamos la variable reyLeon y se afecta el objeto harryPotter
-        reyLeon.titulo = "El hobbit";
-        System.out.println("----------------------------------");
-        System.out.println("reyLeon: " + reyLeon.titulo);
-        System.out.println("harryPotter: " + harryPotter.titulo);
+//        System.out.println("reyLeon: " + reyLeon.titulo);
+//        System.out.println("harryPotter: " + harryPotter.titulo);
+//
+//        //Con esta asignacion "reyLeon new Pelicula" ya quedo desaparecido (inalcanzable)
+//        //reyLeon apunta a donde esta apuntando harryPotter en el heap
+//        reyLeon = harryPotter;
+//        System.out.println("----------------------------------");
+//        System.out.println("reyLeon: " + reyLeon.titulo);
+//        System.out.println("harryPotter: " + harryPotter.titulo);
+//        //Por lo tanto cualquier cambio que se haga en cualquiera de las dos variables sera
+//        //sera visible por todas las variables que esten con esa misma asignacion
+//
+//        //Por ejemplo ahora solo cambiamos la variable reyLeon y se afecta el objeto harryPotter
+//        reyLeon.titulo = "El hobbit";
+//        System.out.println("----------------------------------");
+//        System.out.println("reyLeon: " + reyLeon.titulo);
+//        System.out.println("harryPotter: " + harryPotter.titulo);
     }
 }
 
