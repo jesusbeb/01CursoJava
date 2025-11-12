@@ -24,20 +24,26 @@ public class Plataforma {
     }
 
     public void mostrarTitulos(){
-        //Para cada elemento del tipo "Pelicula" lo identificamos como "pelicula" y
-        //que se encuentra dentro de "contenido", en cada vuelta del ciclo.
-        for (Pelicula pelicula : contenido) {
-            System.out.println(pelicula.getTitulo());
-        }
+        //forEach es parte de la interface List
+        //forEach, para cada elemento de la List contenido, se le identificara como movie y
+        //se imprimira su atributo Titulo
+        // -> es una expresion lambda. Una expresion lambda es una forma corta de escribir un metodo
+        contenido.forEach(movie -> System.out.println(movie.getTitulo()));
     }
 
     public Pelicula buscarPorTitulo(String titulo){
-        for (Pelicula pelicula : contenido){
-            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
-                return pelicula;
-            }
-        }
-        return null;
+        //stream recorre una lista y permite aplicar acciones especificas sobre los elementos
+        return contenido.stream() //recorremos la lista contenido y cada elemento lo identificamos como pelicula
+                .filter(pelicula -> pelicula.getTitulo().equalsIgnoreCase(titulo)) // filtramos por el titulo a buscar
+                .findFirst() // retornamos el primer resultado encontrado
+                .orElse(null); //si no se encontro coincidencia, retornamos nulo
+
+    }
+
+    public List<Pelicula> buscarPorGenero(String genero){
+        return contenido.stream() //stream recorre la lista
+                .filter(movie -> movie.getGenero().equalsIgnoreCase(genero)) //filtramos por genero
+                .toList(); //retornamos los resultados en un List
     }
 
     public void eliminarPelicula(Pelicula pelicula){
