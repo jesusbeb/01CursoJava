@@ -1,5 +1,7 @@
 package org.example.util;
 
+import org.example.contenido.Genero;
+
 import java.util.Scanner;
 
 public class ScannerUtils {
@@ -40,4 +42,30 @@ public class ScannerUtils {
         SCANNER.nextLine();
         return dato;
     }
+
+    public static Genero capturarGenero(String mensaje){
+        //While estara repitiendose hasta que ingresen un genero correcto
+        while (true){
+            //Mostramos los generos existentes
+            //Recorremos el enum Genero para obtener los valores e imprimirlos
+            System.out.println(mensaje + "... Opciones");
+            for (Genero genero : Genero.values()){
+                System.out.println("- " + genero.name());
+            }
+            System.out.println("Cual quieres?");
+
+            //Capturamos el genero solicitado por teclado
+            String entrada = SCANNER.nextLine();
+
+            //Tratamos de convertir el texto capturado en un valor de Genero
+            //Si no es posible, lanzamos una excepcion
+            try {
+                return Genero.valueOf(entrada.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Genero no aceptado.");
+            }
+        }
+    }
+
+
 }

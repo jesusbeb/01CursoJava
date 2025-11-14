@@ -7,13 +7,13 @@ public class Pelicula {
     private String titulo;
     private String descripcion;
     private int duracion;
-    private String genero;
+    private Genero genero;
     private LocalDate fechaEstreno;
     private double calificacion;
     private boolean disponible;
 
     //Constructor
-    public Pelicula(String titulo, int duracion, String genero){
+    public Pelicula(String titulo, int duracion, Genero genero){
         this.titulo = titulo;
         this.duracion = duracion;
         this.genero = genero;
@@ -21,7 +21,7 @@ public class Pelicula {
         this.disponible = true;
     }
 
-    public Pelicula(String titulo, int duracion, String genero, double calificacion){
+    public Pelicula(String titulo, int duracion, Genero genero, double calificacion){
         this(titulo, duracion, genero); //Se usa el constructor anterior, para no repetir su codigo aqui
         this.calificar(calificacion); //Puedo llamar un metodo del objteto dentro del constructor
     }
@@ -63,7 +63,7 @@ public class Pelicula {
         return duracion;
     }
 
-    public String getGenero(){
+    public Genero getGenero(){
         return genero;
     }
 

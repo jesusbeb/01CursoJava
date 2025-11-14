@@ -1,11 +1,12 @@
 package org.example;
 
+import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
 
 public class MainStackHeap {
     public static void main(String[] args) {
-        Pelicula reyLeon = new Pelicula("El Rey Leon", 135, "Animada");
-        Pelicula harryPotter = new Pelicula("Harry Potter", 200, "Fantasia");
+        Pelicula reyLeon = new Pelicula("El Rey Leon", 135, Genero.ANIMADA);
+        Pelicula harryPotter = new Pelicula("Harry Potter", 200, Genero.FANTASIA);
 
 //        System.out.println("reyLeon: " + reyLeon.titulo);
 //        System.out.println("harryPotter: " + harryPotter.titulo);
