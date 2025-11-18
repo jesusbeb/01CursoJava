@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
+import org.example.excepcion.PeliculaExistenteException;
 import org.example.plataforma.Plataforma;
 import org.example.util.ScannerUtils;
 
@@ -51,7 +52,14 @@ public class Main {
                     int duracion = ScannerUtils.capturarNumero("Duracion del contenido");
                     double calificacion = ScannerUtils.capturarDecimal("Calificacion del contenido");
 
-                    plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
+                    //Tratamos de agregar un nuevo elemento
+                    //Si no es posible agregarlo, capturamos la excepcion, obtenemos el mensaje y lo imprimimos
+                    try {
+                        plataforma.agregar(new Pelicula(nombre, duracion, genero, calificacion));
+                    } catch (PeliculaExistenteException e){
+                        System.out.println(e.getMessage());
+                    }
+
                 }
                 case MOSTRAR_TODO -> {
                     List<String> titulos = plataforma.getTitulos(); //Obtenemos la lista de todos los titulos

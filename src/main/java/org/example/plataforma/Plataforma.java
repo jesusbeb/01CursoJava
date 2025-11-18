@@ -2,6 +2,7 @@ package org.example.plataforma;
 
 import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
+import org.example.excepcion.PeliculaExistenteException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,6 +23,15 @@ public class Plataforma {
     //Metodos
 
     public void agregar(Pelicula elemento){
+        //Buscamos si el elemento a agregar ya existe
+        Pelicula contenido = this.buscarPorTitulo(elemento.getTitulo());
+
+        //Si ya existe lanzamos la excepcion con la palabra throw
+        //Instanciamos la excepcion y le enviamos como argumento el titulo
+         if (contenido != null){
+            throw new PeliculaExistenteException(elemento.getTitulo());
+        }
+
         this.contenido.add(elemento); //se agrega la pelicula a la lista de peliculas
     }
 
