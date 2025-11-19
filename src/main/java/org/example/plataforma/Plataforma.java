@@ -5,20 +5,22 @@ import org.example.contenido.Pelicula;
 import org.example.contenido.ResumenContenido;
 import org.example.excepcion.PeliculaExistenteException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 //Esta clase se encarga de administrar los objetos Pelicula en una List
 public class Plataforma {
     //Atributos
+    //Map, usamos Pelicula como clave y como valor el numero de visualizaciones.
+    //El valor del Map no puede ser una variable primitiva
     private String nombre;
     private List<Pelicula> contenido;
+    private Map<Pelicula, Integer> visualizaciones;
 
     //Constructor
     public Plataforma(String nombre){
         this.nombre = nombre;
-        this.contenido = new ArrayList<>(); //Inicializamos la lista, Si no provoca NullPointerException
+        this.contenido = new ArrayList<>(); //Inicializamos la lista, Si no provoca NullPointerException. ArrayList es clase hija de List
+        this.visualizaciones = new HashMap<>(); //Inicializamos el Map. HashMap es una clase hija de Map
     }
 
     //Metodos
@@ -34,6 +36,23 @@ public class Plataforma {
         }
 
         this.contenido.add(elemento); //se agrega la pelicula a la lista de peliculas
+    }
+
+    //Llenamos el Map con el metodo getOrDefault, enviando la pelicula que se va a
+    //reproducir y agregando un valor por default en caso de no encontrar el valor de Pelicula
+    public void reproducirPelicula(Pelicula pelicula){
+        int contador = visualizaciones.getOrDefault(pelicula, 0);
+        System.out.println(pelicula.getTitulo() + " ha sido reproducido " + contador + " veces.");
+
+        //Agregamos esta reproduccion de pelicula a su contador
+        this.contarVisualizaciones(pelicula); //this solo para aclarar que es un metodo de esta clase, no es necesario
+        pelicula.reproducir(); //metodo de Pelicula
+    }
+
+    //Metodo privado porque solo se usara dentro de esta clase
+    private void contarVisualizaciones(Pelicula pelicula){
+        int contador = visualizaciones.getOrDefault(pelicula, 0);
+        visualizaciones.put(pelicula, contador + 1); //con put, agregamos al Map la Pelicula y +1 a las visualizaciones que ya tenga
     }
 
     public List<String> getTitulos(){

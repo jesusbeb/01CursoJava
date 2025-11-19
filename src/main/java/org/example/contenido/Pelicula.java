@@ -28,7 +28,7 @@ public class Pelicula {
 
     //Metodos
     public void reproducir(){
-        System.out.println("Reproduciendo " +titulo);
+        System.out.println("Reproduciendo " +titulo +"...");
     }
 
     public String obtenerFichaTecnica(){

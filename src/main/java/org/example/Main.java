@@ -20,6 +20,7 @@ public class Main {
     public static final int BUSCAR_POR_TITULO = 3;
     public static final int BUSCAR_POR_GENERO = 4;
     public static final int VER_POPULARES = 5;
+    public static final int REPRODUCIR = 6;
     public static final int ELIMINAR = 8;
     public static final int SALIR = 9;
 
@@ -40,6 +41,7 @@ public class Main {
                     3. Buscar por titulo
                     4. Buscar por genero
                     5. Ver populares
+                    6. Reproducir
                     8. Eliminar
                     9. Salir
                     """);
@@ -91,6 +93,18 @@ public class Main {
                     int cantidad = ScannerUtils.capturarNumero("Cantidad de resultados a mostrar");
                     List<Pelicula> peliculasPopulares = plataforma.getPopulares(cantidad);
                     peliculasPopulares.forEach(movie -> System.out.println( +cantidad + " MAS POPULARES: \n" + movie.obtenerFichaTecnica() + "\n"));
+                }
+
+                case REPRODUCIR -> {
+                    String peliculaAReproducir = ScannerUtils.capturarTexto("Nombre del contenido a reproducir");
+                    Pelicula reproducirPelicula = plataforma.buscarPorTitulo(peliculaAReproducir);
+
+                    if ( reproducirPelicula != null){
+                        plataforma.reproducirPelicula(reproducirPelicula);
+                    } else {
+                        System.out.println(peliculaAReproducir.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
+                    }
+
                 }
 
                 case ELIMINAR -> {
