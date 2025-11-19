@@ -6,6 +6,7 @@ import org.example.contenido.Pelicula;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,30 @@ import java.util.List;
 public class FileUtils {
     public static final String ARCHIVO_TXT = "peliculas.txt"; //constante con la ruta y/o nombre del archivo
     public static final String SEPARADOR = "|";
+
+
+    //Metodo para agregar un objeto Pelicula a una linea de texto en un archivo txt
+    public static void escribirPelicula(Pelicula pelicula){
+        //Convertimos el objeto en una linea, usando el metodo join, al cual le indicamos
+        //el caracter separador para cada atributo y enviamos los atributos en String
+        String linea = String.join(SEPARADOR,
+                pelicula.getTitulo(),
+                String.valueOf( pelicula.getDuracion() ),
+                pelicula.getGenero().name(),
+                String.valueOf( pelicula.getCalificacion() ),
+                pelicula.getFechaEstreno().toString()
+        );
+
+        //*El archivo txt debe tener una linea vacia al final de la ultima Pelicula que contenga
+        try{
+            Files.writeString(Paths.get(ARCHIVO_TXT), //Indicamos la ruta del archivo a escribir
+                    linea + System.lineSeparator(), //Agregamos la linea que se escribira y con System.lineaSeparator concatenamos un enter
+                    StandardOpenOption.CREATE, //Si el archivo no existe, se crea
+                    StandardOpenOption.APPEND); //Se agrega la linea sin reemplazar lo existente
+        } catch (IOException e){
+            System.out.println("Error escribiendo el archivo " +e.getMessage());
+        }
+    }
 
 
     //Metodo para inicializar una List<Pelicula< desde un archivo txt

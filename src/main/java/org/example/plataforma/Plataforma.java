@@ -4,6 +4,7 @@ import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
 import org.example.contenido.ResumenContenido;
 import org.example.excepcion.PeliculaExistenteException;
+import org.example.util.FileUtils;
 
 import java.util.*;
 
@@ -35,6 +36,7 @@ public class Plataforma {
             throw new PeliculaExistenteException(elemento.getTitulo());
         }
 
+        FileUtils.escribirPelicula(elemento); //Se agrega la pelicula a un archivo plano de texto
         this.contenido.add(elemento); //se agrega la pelicula a la lista de peliculas
     }
 
