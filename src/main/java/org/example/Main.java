@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
+import org.example.contenido.ResumenContenido;
 import org.example.excepcion.PeliculaExistenteException;
 import org.example.plataforma.Plataforma;
 import org.example.util.ScannerUtils;
@@ -62,8 +63,8 @@ public class Main {
 
                 }
                 case MOSTRAR_TODO -> {
-                    List<String> titulos = plataforma.getTitulos(); //Obtenemos la lista de todos los titulos
-                    titulos.forEach(System.out::println); //Imprimimos con un metodo Reference (referencia al metodo)
+                    List <ResumenContenido> contenidosResumidos = plataforma.getResumenes();
+                    contenidosResumidos.forEach(resumen -> System.out.println(resumen));
                 }
 
                 case BUSCAR_POR_TITULO -> {

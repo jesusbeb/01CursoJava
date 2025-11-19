@@ -2,6 +2,7 @@ package org.example.plataforma;
 
 import org.example.contenido.Genero;
 import org.example.contenido.Pelicula;
+import org.example.contenido.ResumenContenido;
 import org.example.excepcion.PeliculaExistenteException;
 
 import java.util.ArrayList;
@@ -39,6 +40,13 @@ public class Plataforma {
         return contenido.stream() //Recorremos de manera funcional "contenido" con stream
                 .map(Pelicula::getTitulo) //map crea un nuevo stream de String con los titulos de las peliculas
                 .toList(); //El stream de String que obtuvo map se convierte a un List
+    }
+
+    //Metodo que retonar una lista de tipo record ResumenContenido, parecido a getTitulos
+    public List<ResumenContenido> getResumenes(){
+        return contenido.stream()
+                .map(c -> new ResumenContenido(c.getTitulo(), c.getDuracion(), c.getGenero()))
+                .toList();
     }
 
     public Pelicula buscarPorTitulo(String titulo){
