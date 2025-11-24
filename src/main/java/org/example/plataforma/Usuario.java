@@ -1,6 +1,6 @@
 package org.example.plataforma;
 
-import org.example.contenido.Pelicula;
+import org.example.contenido.Contenido;
 
 import java.time.LocalDateTime;
 
@@ -17,9 +17,9 @@ public class Usuario {
 
     //Metodos
 
-    public void ver(Pelicula pelicula){
+    public void ver(Contenido contenido){
         System.out.println(nombre + " esta viendo");
-        pelicula.reproducir();
+        contenido.reproducir();
     }
 
     //Getters

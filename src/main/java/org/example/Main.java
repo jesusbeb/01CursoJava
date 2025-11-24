@@ -28,7 +28,7 @@ public class Main {
         Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
         System.out.println(NOMBRE_PLATAFORMA + VERSION);
 
-        cargarPeliculas(plataforma);
+        cargarContenido(plataforma);
 
         System.out.println("Mas de " + plataforma.getDuracionTotal() + " minutos de contenido! \n");
 
@@ -71,7 +71,6 @@ public class Main {
                     }
 
                 }
-
                 case MOSTRAR_TODO -> {
                     List <ResumenContenido> contenidosResumidos = plataforma.getResumenes();
                     contenidosResumidos.forEach(resumen -> System.out.println(resumen));
@@ -91,26 +90,26 @@ public class Main {
                 case BUSCAR_POR_GENERO -> {
                     //Convertimos el String capturado en un enum Genero
                     Genero generoBuscado = ScannerUtils.capturarGenero("Nombre del genero a buscar");
-                    List<Contenido> peliculasPorGenero = plataforma.buscarPorGenero(generoBuscado);
+                    List<Contenido> contenidosPorGenero = plataforma.buscarPorGenero(generoBuscado);
 
-                    System.out.println(peliculasPorGenero.size() + " encontradas para el genero " + generoBuscado );
-                    peliculasPorGenero.forEach(pelicula -> System.out.println(pelicula.obtenerFichaTecnica() + "\n"));
+                    System.out.println(contenidosPorGenero.size() + " encontradas para el genero " + generoBuscado );
+                    contenidosPorGenero.forEach(contenido -> System.out.println(contenido.obtenerFichaTecnica() + "\n"));
                 }
 
                 case VER_POPULARES -> {
                     int cantidad = ScannerUtils.capturarNumero("Cantidad de resultados a mostrar");
-                    List<Contenido> peliculasPopulares = plataforma.getPopulares(cantidad);
-                    peliculasPopulares.forEach(movie -> System.out.println( +cantidad + " MAS POPULARES: \n" + movie.obtenerFichaTecnica() + "\n"));
+                    List<Contenido> contenidoPopular = plataforma.getPopulares(cantidad);
+                    contenidoPopular.forEach(c -> System.out.println( cantidad + " MAS POPULARES: \n" + c.obtenerFichaTecnica() + "\n"));
                 }
 
                 case REPRODUCIR -> {
-                    String peliculaAReproducir = ScannerUtils.capturarTexto("Nombre del contenido a reproducir");
-                    Contenido reproducirContenido = plataforma.buscarPorTitulo(peliculaAReproducir);
+                    String nombreContenido = ScannerUtils.capturarTexto("Nombre del contenido a reproducir");
+                    Contenido contenido = plataforma.buscarPorTitulo(nombreContenido);
 
-                    if ( reproducirContenido != null){
-                        plataforma.reproducirPelicula(reproducirContenido);
+                    if ( contenido != null){
+                        plataforma.reproducirContenido(contenido);
                     } else {
-                        System.out.println(peliculaAReproducir.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
+                        System.out.println(nombreContenido.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
                     }
 
                 }
@@ -120,7 +119,7 @@ public class Main {
                     Contenido contenidoAEliminar = plataforma.buscarPorTitulo(nombreAEliminar);
 
                     if ( contenidoAEliminar != null){
-                        plataforma.eliminarPelicula(contenidoAEliminar);
+                        plataforma.eliminarContenido(contenidoAEliminar);
                         System.out.println(nombreAEliminar.toUpperCase() + " ELIMINADO!");
                     } else {
                         System.out.println(nombreAEliminar.toUpperCase() + " No existe dentro de " +plataforma.getNombre());
@@ -138,7 +137,7 @@ public class Main {
     }
 
 
-    private static void cargarPeliculas(Plataforma plataforma) {
+    private static void cargarContenido(Plataforma plataforma) {
         plataforma.getContenido().addAll(FileUtils.leerArchivo()); //Cargamos la List de peliculas
     }
 

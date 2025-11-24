@@ -2,6 +2,7 @@ package org.example.contenido;
 
 import java.time.LocalDate;
 
+//Renombramos la clase Pelicula por Contenido
 public class Contenido {
     //Atributos
     private String titulo;
@@ -33,9 +34,9 @@ public class Contenido {
 
     public String obtenerFichaTecnica(){
         return "Titulo: " + titulo + "\n" +
-        "Año de estreno: " + fechaEstreno.getYear() + "\n" +
-        "Genero: " +genero + "\n" +
-        "Calificacion: " + calificacion + "/5";
+                "Año de estreno: " + fechaEstreno.getYear() + "\n" +
+                "Genero: " +genero + "\n" +
+                "Calificacion: " + calificacion + "/5";
     }
 
     //Validamos calificacion entre 0 y 5

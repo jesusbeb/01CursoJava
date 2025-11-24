@@ -6,7 +6,7 @@ public class PeliculaExistenteException extends RuntimeException{
 
     //Constructor que recibe un mensaje
     public PeliculaExistenteException(String titulo){
-        super("La pelicula " + titulo + " ya axiste.");
+        super("El contenido " + titulo + " ya axiste.");
     }
 }
 

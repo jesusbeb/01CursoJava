@@ -1,7 +1,7 @@
 package org.example.util;
 
 import org.example.contenido.Genero;
-import org.example.contenido.Pelicula;
+import org.example.contenido.Contenido;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,23 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
-    public static final String ARCHIVO_TXT = "peliculas.txt"; //constante con la ruta y/o nombre del archivo
+    public static final String ARCHIVO_TXT = "contenido.txt"; //constante con la ruta y/o nombre del archivo
     public static final String SEPARADOR = "|";
 
 
-    //Metodo para agregar un objeto Pelicula a una linea de texto en un archivo txt
-    public static void escribirPelicula(Pelicula pelicula){
+    //Metodo para agregar un objeto Contenido a una linea de texto en un archivo txt
+    public static void escribirContenido(Contenido contenido){
         //Convertimos el objeto en una linea, usando el metodo join, al cual le indicamos
         //el caracter separador para cada atributo y enviamos los atributos en String
         String linea = String.join(SEPARADOR,
-                pelicula.getTitulo(),
-                String.valueOf( pelicula.getDuracion() ),
-                pelicula.getGenero().name(),
-                String.valueOf( pelicula.getCalificacion() ),
-                pelicula.getFechaEstreno().toString()
+                contenido.getTitulo(),
+                String.valueOf( contenido.getDuracion() ),
+                contenido.getGenero().name(),
+                String.valueOf( contenido.getCalificacion() ),
+                contenido.getFechaEstreno().toString()
         );
 
-        //*El archivo txt debe tener una linea vacia al final de la ultima Pelicula que contenga
+        //*El archivo txt debe tener una linea vacia al final del ultimo contenido existente
         try{
             Files.writeString(Paths.get(ARCHIVO_TXT), //Indicamos la ruta del archivo a escribir
                     linea + System.lineSeparator(), //Agregamos la linea que se escribira y con System.lineaSeparator concatenamos un enter
@@ -40,14 +40,14 @@ public class FileUtils {
     }
 
 
-    //Metodo para inicializar una List<Pelicula< desde un archivo txt
-    public static List<Pelicula> leerArchivo(){
-        //Lista de Peliculas para almacenar las que se obtendran del archivo
-        List<Pelicula> peliculasDesdeArchivo = new ArrayList<>();
+    //Metodo para inicializar una List<Contenido> desde un archivo txt
+    public static List<Contenido> leerArchivo(){
+        //Lista de Contenido para almacenar lo que se obtendran del archivo
+        List<Contenido> contenidoDesdeArchivo = new ArrayList<>();
 
         try{
             //Leemos las lineas del archivo y las almacenamos en un List<String>
-            //En cada linea del archivo, esta la informacion de cada Pelicula
+            //En cada linea del archivo, esta la informacion de cada Contenido
             List<String> lineas = Files.readAllLines(Paths.get(ARCHIVO_TXT));
 
             //Recorremos cada linea y separamos cada atributo, usando el metodo split e
@@ -65,16 +65,16 @@ public class FileUtils {
                     double calificacion = atributos[3].isBlank() ? 0 : Double.parseDouble(atributos[3]);
                     LocalDate fechaEstreno = LocalDate.parse(atributos[4]);
 
-                    Pelicula pelicula = new Pelicula(titulo, duracion, genero, calificacion); //Instanciamos e inicializamos
-                    pelicula.setFechaEstreno(fechaEstreno);
+                    Contenido contenido = new Contenido(titulo, duracion, genero, calificacion); //Instanciamos e inicializamos
+                    contenido.setFechaEstreno(fechaEstreno);
 
-                    peliculasDesdeArchivo.add(pelicula); //agregamos la pelicula al List
+                    contenidoDesdeArchivo.add(contenido); //agregamos el Contenido al List
                 }
             });
 
         } catch (IOException e){ //Capturamos dentro de la variable "e" el IOException en caso de error al leer el archivo
             System.out.println("Error leyendo el archivo " +e.getMessage()); //Imprimimos un mensaje, junto con el mensaje del IOException
         }
-        return peliculasDesdeArchivo;
+        return contenidoDesdeArchivo;
     }
 }
