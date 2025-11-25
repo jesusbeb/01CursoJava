@@ -1,8 +1,6 @@
 package org.example.plataforma;
 
-import org.example.contenido.Genero;
-import org.example.contenido.Contenido;
-import org.example.contenido.ResumenContenido;
+import org.example.contenido.*;
 import org.example.excepcion.PeliculaExistenteException;
 import org.example.util.FileUtils;
 
@@ -90,6 +88,25 @@ public class Plataforma {
                 .sorted(Comparator.comparingDouble(Contenido::getCalificacion).reversed()) //Ordenamos por calificacion que esta en Double de menor a mayor y luego se revierte de mayor a menor
                 .limit(cantidad) //Obtenemos solo los primeros del stream, segun se indique la cantidad
                 .toList(); //convertimos a lista
+    }
+
+    //Metodo que obtiene Contenido de tipo Peliculas
+    //con filter, filtramos donde el Contenido sea instancia de Pelicula
+    //con map mapeamos el contenido filtrado para castearlo a Pelicula, esto
+    //es necesario porque antes del filter, el tipo del stream es Contenido
+    public List<Pelicula> getPeliculas(){
+        return contenido.stream()
+                .filter(movie -> movie instanceof Pelicula)
+                .map(contenidoFiltrado -> (Pelicula) contenidoFiltrado)
+                .toList();
+    }
+
+    //Metodo que obtiene Contenido de tipo Documentales
+    public List<Documental> getDocumentales(){
+        return contenido.stream()
+                .filter(documentl -> documentl instanceof Documental)
+                .map(contenidoFiltrado -> (Documental) contenidoFiltrado)
+                .toList();
     }
 
     //Duracion total de todo el contenido de la plataforma
