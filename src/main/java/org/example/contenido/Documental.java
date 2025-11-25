@@ -15,6 +15,11 @@ public class Documental extends Contenido{
         this.narrador = narrador; //Luego asignamos el valor del atributo de la clase hija. Esto pudo haber sido en cualquiera de los dos constructores
     }
 
+    @Override
+    public void reproducir() {
+        System.out.println("Reproduciendo el documental " +getTitulo() +" narrado por " +getNarrador() +"...");
+    }
+
     //Getter
 
     public String getNarrador(){

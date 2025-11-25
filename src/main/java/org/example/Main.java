@@ -67,7 +67,6 @@ public class Main {
                             String narrador = ScannerUtils.capturarTexto("Narrador del documental");
                             plataforma.agregar(new Documental(nombre, duracion, genero, calificacion, narrador));
                         }
-                        plataforma.agregar(new Contenido(nombre, duracion, genero, calificacion));
                     } catch (PeliculaExistenteException e){
                         System.out.println(e.getMessage());
                     }
@@ -104,6 +103,7 @@ public class Main {
                     contenidoPopular.forEach(c -> System.out.println( cantidad + " MAS POPULARES: \n" + c.obtenerFichaTecnica() + "\n"));
                 }
 
+                //El metodo reproducir busca un Contenido y lo trata como Contenido, no lo trata como Pelicula o Documental
                 case REPRODUCIR -> {
                     String nombreContenido = ScannerUtils.capturarTexto("Nombre del contenido a reproducir");
                     Contenido contenido = plataforma.buscarPorTitulo(nombreContenido);

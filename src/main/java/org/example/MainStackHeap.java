@@ -5,8 +5,8 @@ import org.example.contenido.Contenido;
 
 public class MainStackHeap {
     public static void main(String[] args) {
-        Contenido reyLeon = new Contenido("El Rey Leon", 135, Genero.ANIMADA);
-        Contenido harryPotter = new Contenido("Harry Potter", 200, Genero.FANTASIA);
+//        Contenido reyLeon = new Contenido("El Rey Leon", 135, Genero.ANIMADA);
+//        Contenido harryPotter = new Contenido("Harry Potter", 200, Genero.FANTASIA);
 
 //        System.out.println("reyLeon: " + reyLeon.titulo);
 //        System.out.println("harryPotter: " + harryPotter.titulo);

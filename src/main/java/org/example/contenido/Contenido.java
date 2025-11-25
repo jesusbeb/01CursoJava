@@ -3,7 +3,9 @@ package org.example.contenido;
 import java.time.LocalDate;
 
 //Renombramos la clase Pelicula por Contenido
-public class Contenido {
+//abstract hace que la clase Contenido no se pueda instanciar o crear dentro del proyecto
+//
+public abstract class Contenido {
     //Atributos
     private String titulo;
     private String descripcion;
@@ -28,9 +30,11 @@ public class Contenido {
     }
 
     //Metodos
-    public void reproducir(){
-        System.out.println("Reproduciendo " +titulo +"...");
-    }
+
+    //Metodo abstracto que queda vacio y hace que las clases hijas implementen su
+    //propio metodo reproducir() y lo sobreescriban
+    //Para poder crear un metodo abstracto la clase debe ser abstracta tambien
+    public abstract void reproducir();
 
     public String obtenerFichaTecnica(){
         return "Titulo: " + titulo + "\n" +

@@ -40,6 +40,9 @@ public class Plataforma {
 
     //Llenamos el Map con el metodo getOrDefault, enviando el elemento que se va a
     //reproducir y agregando un valor por default en caso de no encontrar el valor de Elemento
+    //Se reproduce un Contenido, usando el metodo reproducir() de Contenido, el cual es un
+    //metodo abstracto que esta vacio, por lo que Java debe buscar el tipo especifico de como se
+    //sobreescribio y ejecutarlo de esa manera
     public void reproducirContenido(Contenido contenido){
         int contador = visualizaciones.getOrDefault(contenido, 0);
         System.out.println(contenido.getTitulo() + " ha sido reproducido " + contador + " veces.");
