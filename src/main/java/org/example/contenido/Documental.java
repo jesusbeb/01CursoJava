@@ -1,6 +1,8 @@
 package org.example.contenido;
 
-public class Documental extends Contenido{
+//Documental extiende de Contenido e implementa de Promocionable, por lo que
+//tendra que implementar los metodos de la clase que implementa
+public class Documental extends Contenido implements Promocionable{
     //Añadimos un atributo propio de Documental pero no existe para Contenido
     private String narrador;
 
@@ -18,6 +20,11 @@ public class Documental extends Contenido{
     @Override
     public void reproducir() {
         System.out.println("Reproduciendo el documental " +getTitulo() +" narrado por " +getNarrador() +"...");
+    }
+
+    @Override
+    public String promocionar() {
+        return "Descubre el Documental " + this.getTitulo() + " narrado por " + narrador + ". ¡Ahora en PlatziPlay!";
     }
 
     //Getter

@@ -32,6 +32,7 @@ public class Main {
         cargarContenido(plataforma);
 
         System.out.println("Mas de " + plataforma.getDuracionTotal() + " minutos de contenido! \n");
+        plataforma.getContenidoPromocionable().forEach(cp -> System.out.println( cp.promocionar() +"\n" ));
 
         //Menu
         while(true) {

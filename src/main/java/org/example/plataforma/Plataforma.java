@@ -112,6 +112,14 @@ public class Plataforma {
                 .toList();
     }
 
+    //Metodo para obtener el Contenido que esta promocionado
+    public List<Promocionable> getContenidoPromocionable(){
+        return contenido.stream()
+                .filter(c -> c instanceof Promocionable)
+                .map(contenidoProm -> (Promocionable) contenidoProm)
+                .toList();
+    }
+
     //Duracion total de todo el contenido de la plataforma
     public int getDuracionTotal(){
         return contenido.stream() //transformarmos la lista contenido en un stream
